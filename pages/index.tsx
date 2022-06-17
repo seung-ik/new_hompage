@@ -14,6 +14,9 @@ const Home: NextPage = () => (
     <Link href="/trade">
       <button>trade</button>
     </Link>
+    <Link href="/ssrtest">
+      <button>ssrtest</button>
+    </Link>
   </div>
 );
 
