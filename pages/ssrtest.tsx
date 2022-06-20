@@ -34,16 +34,11 @@ const SSRPage: NextPage<props> = ({ data }) => {
 
 export default SSRPage;
 
-export const getStaticProps = async () => {
-  // export const getServerSideProps = async () => {
+// export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await axios.get('https://worldtimeapi.org/api/ip');
   console.log(res.data);
   return {
     props: { data: res.data },
   };
-
-  // const payment_currency = 'KRW';
-  // const response = await axios.get(`https://api.bithumb.com/public/ticker/ALL_${payment_currency}`);
-  // const coinList: string[] = Object.keys(response.data.data);
-  // return { props: { coinList } };
 };

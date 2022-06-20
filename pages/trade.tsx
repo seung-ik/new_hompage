@@ -40,10 +40,19 @@ const Trade: NextPage<props> = ({ coinList }) => {
           {coinList?.map((coin: string) => (
             <div
               onClick={() => onClickCoinList(coin)}
-              style={{ border: '1px solid black', padding: '10px', marginBottom: '4px' }}
+              style={{
+                border: '1px solid black',
+                padding: '10px',
+                marginBottom: '4px',
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
               key={coin}
             >
               {coin}
+              <Link href={`/coin/${coin}`}>
+                <a style={{ border: '1px solid red' }}>상세page로이동</a>
+              </Link>
             </div>
           ))}
         </div>
