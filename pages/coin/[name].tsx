@@ -43,7 +43,7 @@ export default DynamicRoutePage;
 
 export const getStaticPaths = async () => ({
   paths: [{ params: { name: 'BTC' } }, { params: { name: 'ETH' } }, { params: { name: 'LTC' } }],
-  fallback: true,
+  fallback: true, // false인 경우 : path 이외에는 404페이지 반환, true인 경우 : fallback버전을 보여주면서 백그라운드에서 staticProps 함수 작동, 'blocking'인 경우 fallback 버전 따로 없이 백그라운드에서 작동
 });
 
 export const getStaticProps = async (ctx: any) => {
