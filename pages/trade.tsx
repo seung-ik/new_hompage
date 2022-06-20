@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NextPage } from 'next';
 import axios from 'axios';
 import Link from 'next/link';
-import Detail from '../../src/components/Detail';
+import Detail from '../src/components/Detail';
 
 interface props {
   coinList: string[];
@@ -10,8 +10,8 @@ interface props {
 
 const Trade: NextPage<props> = ({ coinList }) => {
   // const Trade: NextPage<props> = () => {
-  // const payment_currency = 'KRW';
-  // const [coinList, setCoinListData] = useState<string[]>([]);
+  //   const payment_currency = 'KRW';
+  //   const [coinList, setCoinListData] = useState<string[]>([]);
   const [selectedCoin, setSelectedCoin] = useState('BTC');
 
   const onClickCoinList = (name: string) => {
@@ -53,20 +53,28 @@ const Trade: NextPage<props> = ({ coinList }) => {
   );
 };
 
-Trade.getInitialProps = async (ctx) => {
-  // console.log(ctx);
-  const payment_currency = 'KRW';
-  const response = await axios.get(`https://api.bithumb.com/public/ticker/ALL_${payment_currency}`);
-  const coinList: string[] = Object.keys(response.data.data);
-  return { coinList };
-};
+// Trade.getInitialProps = async (ctx) => {
+//   // console.log(ctx);
+//   const payment_currency = 'KRW';
+//   const response = await axios.get(`https://api.bithumb.com/public/ticker/ALL_${payment_currency}`);
+//   const coinList: string[] = Object.keys(response.data.data);
+//   return { coinList };
+// };
 
 export default Trade;
 
-// export const getServerSideProps = async (ctx) => {
+// export const getServerSideProps = async (ctx: any) => {
 //   console.log(ctx);
 //   const payment_currency = 'KRW';
 //   const response = await axios.get(`https://api.bithumb.com/public/ticker/ALL_${payment_currency}`);
 //   const coinList: string[] = Object.keys(response.data.data);
+//   console.log(coinList);
 //   return { props: { coinList } };
 // };
+
+export const getStaticProps = async () => {
+  const payment_currency = 'KRW';
+  const response = await axios.get(`https://api.bithumb.com/public/ticker/ALL_${payment_currency}`);
+  const coinList: string[] = Object.keys(response.data.data);
+  return { props: { coinList }, revalidate: 10 };
+};
